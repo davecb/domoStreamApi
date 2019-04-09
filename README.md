@@ -5,6 +5,7 @@
 ## Warning
 
 Domo does not officially support this golang API library
+The original author doesn't either.  Consider it an orphan...
 
 ### About
 
@@ -36,7 +37,7 @@ Domo does not officially support this golang API library
 go get:
 
 ```golang
-go get github.com/JumboInteractiveLimited/domostreamapi 
+go get github.com/davecb/domoStreamApi # was JumboInteractiveLimited/domostreamapi 
 ```
 
 ### Usage
