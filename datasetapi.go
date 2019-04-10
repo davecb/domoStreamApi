@@ -75,6 +75,33 @@ func (d *DataSetService) Retrieve(id string) (list Dataset, err error) {
 	return
 }
 
+// Query runs an sql query on a dataset, as per
+// https://developer.domo.com/docs/dataset-api-reference/dataset
+//
+//POST https://api.domo.com/v1/datasets/query/execute/ce79d23f-ef7d-4318-9787-ebde54a8c5b4
+//Accept: application/json
+//Authorization: bearer <your-valid-oauth-access-token>
+//{"sql": "SELECT * FROM table"}
+func (d *DataSetService) Query(datasetID, query string) (data string, err error) {
+	d.client.getAccessToken("data")
+	url := fmt.Sprintf("%s/v1/datasets", baseURL, datasetID)
+	body := strings.NewReader(query)
+	
+	header := map[string]string{
+		"Content-Type": "application/json",
+	}
+
+	bodyBytes, statusCode, err := d.client.genericPOST(url, body, header)
+	if err != nil {
+		return data, fmt.Errorf("Failed to query via the Domo API %s", err)
+	}
+
+	logger(fmt.Sprintf("query Status Code : %d", statusCode))
+	err = json.Unmarshal(bodyBytes, &data)
+	bodyString := string(bodyBytes)
+	return bodyString, err
+}
+
 // Export data from a DataSet in your Domo instance.
 // Returns a raw CSV in the response body or error for the outcome of data being exported into DataSet.
 // NOTE: Sometimes sends  a 406 error, have tried setting various Accept-Language and Accept-Charset
