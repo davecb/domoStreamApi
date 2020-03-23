@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-
-	"github.com/JumboInteractiveLimited/domostreamapi"
+	domo "github.com/davecb/domoStreamApi"
+	// formerly "github.com/JumboInteractiveLimited/domostreamapi"
 )
 
 func main() {

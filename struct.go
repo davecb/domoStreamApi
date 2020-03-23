@@ -20,7 +20,7 @@ type Group struct {
 	Default     bool   `json:"default"`
 }
 
-//Datasets ist of datasets
+//Datasets is improper superset of datasets
 type Datasets []struct {
 	ID            string    `json:"id"`
 	Name          string    `json:"name"`

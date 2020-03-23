@@ -3,6 +3,7 @@ package domo
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"strings"
 )
@@ -51,6 +52,7 @@ func (d *DataSetService) List() (list Datasets, err error) {
 	return
 }
 
+// FIXME this has never worked for me
 // Retrieve the details of an existing DataSet.
 // Definition
 // GET https://api.domo.com/v1/datasets/{DATASET_ID}
@@ -59,6 +61,8 @@ func (d *DataSetService) List() (list Datasets, err error) {
 // if the DataSet ID is related to a DataSet that has been deleted,
 // a subset of the DataSet's information will be returned, including a deleted property, which will be true.
 func (d *DataSetService) Retrieve(id string) (list Dataset, err error) {
+	err =  errors.New("domo.Retrieve has never worked for me")
+	return
 	d.client.getAccessToken("data")
 	url := fmt.Sprintf("%s/v1/datasets/%s", baseURL, id)
 	bodyBytes, _, err := d.client.genericGET(url, nil)
